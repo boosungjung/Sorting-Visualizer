@@ -1,0 +1,24 @@
+.background{
+    height: 2000px;
+    background-color: #282c34;
+
+}
+
+.array-container{
+    position: relative;
+    margin: 0 33px;
+}
+
+
+.array-bar{
+    height: 1000px;
+    width:2px;
+    background-color: papayawhip;
+    display: inline-block;
+    margin: 0 1px;
+}
+.button{
+    position: relative;
+    height:60px;
+    width:300px;
+}
