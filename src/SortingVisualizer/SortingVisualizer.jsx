@@ -6,6 +6,9 @@ import quickSort from "../SortingAlgorithms/quickSort";
 
 const MAX_NUM = 700;
 const MIN_NUM = 5;
+const ANIMATION_SPEED_MS = 1;
+
+
 let SCREEN_WIDTH = (window.screen.width - 200) / 4; // 200px padding, 4px for margin and array bar width
 export default class SortingVisualizer extends React.Component {
 
@@ -24,17 +27,24 @@ export default class SortingVisualizer extends React.Component {
     resetArray() {
         const array = [];
         for (let i = 0; i < SCREEN_WIDTH; i++) {
-            array.push(getRandInt(MIN_NUM, MAX_NUM));
+            array.push(getRandInt(MIN_NUM,MAX_NUM));
         }
         this.setState({array});
     }
 
     mergeSort(){}
 
-    quickSort(){
-        let arr = [2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 9, 10, 12, 12, 12, 13, 13, 13, 15, 15, 16, 16, 18, 20, 22, 23, 23, 24, 24, 25, 34, 34, 34, 43, 55, 66, 79, 123, 123, 545];
-        console.log(checkSorter(quickSort)(arr))
-
+    quickSort() {
+        const animations = quickSort(this.state.array);
+        console.log(animations)
+        for (let i = 0; i < animations.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar');
+            setTimeout(() => {
+                const [barOneIdx, newHeight] = animations[i];
+                const barOneStyle = arrayBars[barOneIdx].style;
+                barOneStyle.height = `${newHeight}px`;
+            }, i * ANIMATION_SPEED_MS);
+        }
     }
 
     heapSort(){}
@@ -44,6 +54,19 @@ export default class SortingVisualizer extends React.Component {
         let arr = [2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 9, 10, 12, 12, 12, 13, 13, 13, 15, 15, 16, 16, 18, 20, 22, 23, 23, 24, 24, 25, 34, 34, 34, 43, 55, 66, 79, 123, 123, 545];
         console.log(medianOfMedians(arr, 0, arr.length))
     }
+
+    testAlgorithms(){
+        for(let i = 0; i < 1000; i++){
+            const arr = [];
+
+            for(let j = 0; j<getRandInt(5,10000); j++){
+                arr.push(getRandInt(-1000,1000))
+            }
+            console.log(checkSorter(quickSort)(arr))
+
+        }
+    }
+
 
 
     // render the interface
@@ -64,6 +87,7 @@ export default class SortingVisualizer extends React.Component {
                     <button className="button" id = "btnQuickSort" onClick={() => this.quickSort()}>Quick Sort</button>
                     <button className="button" id = "btnHeapSort" onClick={() => this.heapSort()}>Heap Sort</button>
                     <button className="button" id = "btnInsertionSort" onClick={() => this.insertionSort()}>Insertion Sort</button>
+                    <button className="button" id = "btnTestAlgorithms" onClick={() => this.testAlgorithms()}>Test Sorting Algorithms</button>
                 </div>
             </div>
         )
