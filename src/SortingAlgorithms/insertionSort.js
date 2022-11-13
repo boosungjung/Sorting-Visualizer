@@ -11,6 +11,7 @@ const insertionSort = array =>{
         }
         array[j + 1] = key
     }
+
     return animations;
 }
 export default insertionSort;

@@ -17,7 +17,8 @@ export default class SortingVisualizer extends React.Component {
         super(props, context);
 
         this.state = {
-            array: []
+            array: [],
+            speed: 1
         };
     }
 
@@ -26,21 +27,24 @@ export default class SortingVisualizer extends React.Component {
     }
 
     resetArray() {
-        const array = [];
-        for (let i = 0; i < SCREEN_WIDTH; i++) {
+        const array = [MAX_NUM];
+        for (let i = 0; i < SCREEN_WIDTH-1; i++) {
             array.push(getRandInt(MIN_NUM,MAX_NUM));
             // array.push(i);
         }
         // array.sort(()=>Math.random() - 0.5)
-        this.setState({array});
+        this.setState(()=>{
+            return{
+                array: array,
+                speed: this.state.speed, //keeps old state
+            }
+        });
     }
 
     mergeSort(){}
 
     quickSort() {
-        updateAnimation(quickSort(this.state.array))(1);
-
-
+        updateAnimation(quickSort(this.state.array))(this.state.speed/2);
     }
 
     heapSort(){
@@ -49,7 +53,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     insertionSort(){
-        updateAnimation(insertionSort(this.state.array))(0.1);
+        updateAnimation(insertionSort(this.state.array))(this.state.speed/10);
     }
 
     testAlgorithms(){
@@ -64,6 +68,27 @@ export default class SortingVisualizer extends React.Component {
         }
     }
 
+    increaseSpeed(){
+        this.changeSpeed(-0.1)
+    }
+
+    decreaseSpeed(){
+        this.changeSpeed(0.1)
+
+    }
+
+
+    changeSpeed = (speed) =>{
+        const speedElem = document.getElementById('speed');
+        console.log(this.state.speed + speed)
+        if (this.state.speed + speed > 0.1 && this.state.speed < 1.9) {
+            this.state.speed += speed
+            speedElem.innerHTML = Math.ceil((1 - this.state.speed) * 100 + 100) + "%";
+        }else{
+            speedElem.innerHTML = "LIMIT REACHED";
+            this.state.speed = 1
+        }
+    }
 
 
     // render the interface
@@ -79,12 +104,18 @@ export default class SortingVisualizer extends React.Component {
                             key={idx}
                             style={{height: `${val}px`}}></div>
                     ))}
+
+                </div>
+                <div className={"button-container"}>
                     <button className="button" id = "btnReset" onClick={() => this.resetArray()}>Generate New Array</button>
                     <button className="button" id = "btnMergeSort" onClick={() => this.mergeSort()}>Merge Sort</button>
                     <button className="button" id = "btnQuickSort" onClick={() => this.quickSort()}>Quick Sort</button>
                     <button className="button" id = "btnHeapSort" onClick={() => this.heapSort()}>Heap Sort</button>
                     <button className="button" id = "btnInsertionSort" onClick={() => this.insertionSort()}>Insertion Sort</button>
                     <button className="button" id = "btnTestAlgorithms" onClick={() => this.testAlgorithms()}>Test Sorting Algorithms</button>
+                    <button className="button" id = "btnIncreaseSpeed" onClick={() => this.increaseSpeed()}>IncreaseSpeed</button>
+                    <button className="button" id = "btnDecreaseSpeed" onClick={() => this.decreaseSpeed()}>DecreaseSpeed</button>
+                    <h1 id="speed" style={{backgroundColor: "white"}}>{this.state.speed*100}%</h1>
                 </div>
             </div>
         )
@@ -104,6 +135,7 @@ const getRandInt = (min, max) => {
 }
 
 const updateAnimation = (animations) => (speed) => {
+
     const arrayBars = document.getElementsByClassName('array-bar');
     for (let i = 0; i < animations.length; i++) {
         setTimeout(() => {
@@ -113,3 +145,4 @@ const updateAnimation = (animations) => (speed) => {
         }, i * speed);
     }
 }
+

@@ -5,18 +5,24 @@
 }
 
 .array-container{
-    height: 500px;
-    position: absolute;
+    float: left;
+    height: 700px;
+    width: 100%;
     margin: 0 33px;
+
 }
 
-
 .array-bar{
-    height: 1000px;
+    display: inline-block;
     width:2px;
     background-color: papayawhip;
-    display: inline-block;
     margin: 0 1px;
+    /*float: left;*/
+}
+.button-container{
+    height: 100px;
+    width: 100%;
+    position: static;
 }
 .button{
     position: relative;
