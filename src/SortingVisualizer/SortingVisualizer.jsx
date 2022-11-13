@@ -8,6 +8,8 @@ import playTone from "../tones/simpleTones";
 
 const MAX_NUM = 700;
 const MIN_NUM = 5;
+const SPEED_MIN = 0;
+const SPEED_MAX = 1.9;
 
 
 let SCREEN_WIDTH = (window.screen.width - 200) / 4; // 200px padding, 4px for margin and array bar width
@@ -53,7 +55,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     insertionSort(){
-        updateAnimation(insertionSort(this.state.array))(this.state.speed/10);
+        updateAnimation(insertionSort(this.state.array))(this.state.speed/10); // /10 because insertion sort is so slow
     }
 
     testAlgorithms(){
@@ -80,13 +82,17 @@ export default class SortingVisualizer extends React.Component {
 
     changeSpeed = (speed) =>{
         const speedElem = document.getElementById('speed');
-        console.log(this.state.speed + speed)
-        if (this.state.speed + speed > 0.1 && this.state.speed < 1.9) {
+        const finalSpeed = Math.round((this.state.speed + speed)*100)/100
+        console.log(finalSpeed)
+
+        if (finalSpeed > SPEED_MIN && this.state.speed < SPEED_MAX) {
             this.state.speed += speed
-            speedElem.innerHTML = Math.ceil((1 - this.state.speed) * 100 + 100) + "%";
+            speedElem.innerHTML = "Speed " + Math.round((1 - this.state.speed) * 100 + 100) + "%";
         }else{
-            speedElem.innerHTML = "LIMIT REACHED";
             this.state.speed = 1
+
+            speedElem.innerHTML = "Speed " + Math.round((1 - this.state.speed) * 100 + 100) + "%";
+
         }
     }
 
@@ -108,14 +114,15 @@ export default class SortingVisualizer extends React.Component {
                 </div>
                 <div className={"button-container"}>
                     <button className="button" id = "btnReset" onClick={() => this.resetArray()}>Generate New Array</button>
-                    <button className="button" id = "btnMergeSort" onClick={() => this.mergeSort()}>Merge Sort</button>
-                    <button className="button" id = "btnQuickSort" onClick={() => this.quickSort()}>Quick Sort</button>
-                    <button className="button" id = "btnHeapSort" onClick={() => this.heapSort()}>Heap Sort</button>
+                    <button className="button" disabled={true} id = "btnMergeSort" onClick={() => this.mergeSort()}>Merge Sort</button>
+                    <button className="button" id = "btnQuickSort" onClick={() => this.quickSort()}>Quick Sort(DNF)</button>
+                    <button className="button" disabled={true} id = "btnHeapSort" onClick={() => this.heapSort()}>Heap Sort</button>
                     <button className="button" id = "btnInsertionSort" onClick={() => this.insertionSort()}>Insertion Sort</button>
                     <button className="button" id = "btnTestAlgorithms" onClick={() => this.testAlgorithms()}>Test Sorting Algorithms</button>
-                    <button className="button" id = "btnIncreaseSpeed" onClick={() => this.increaseSpeed()}>IncreaseSpeed</button>
                     <button className="button" id = "btnDecreaseSpeed" onClick={() => this.decreaseSpeed()}>DecreaseSpeed</button>
-                    <h1 id="speed" style={{backgroundColor: "white"}}>{this.state.speed*100}%</h1>
+
+                    <button className="button" id = "btnIncreaseSpeed" onClick={() => this.increaseSpeed()}>IncreaseSpeed</button>
+                    <h1 id="speed" style={{color: "white"}}>Speed {this.state.speed*100}%</h1>
                 </div>
             </div>
         )
