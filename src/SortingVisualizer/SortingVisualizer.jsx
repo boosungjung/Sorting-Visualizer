@@ -3,10 +3,11 @@ import './SortingVisualizer.css';
 import insertionSort from "../SortingAlgorithms/insertionSort";
 import medianOfMedians from "../SortingAlgorithms/AuxiliaryAlgorithms/MedianOfMedians";
 import quickSort from "../SortingAlgorithms/quickSort";
+import playTone from "../tones/simpleTones";
+
 
 const MAX_NUM = 700;
 const MIN_NUM = 5;
-const ANIMATION_SPEED_MS = 1;
 
 
 let SCREEN_WIDTH = (window.screen.width - 200) / 4; // 200px padding, 4px for margin and array bar width
@@ -28,33 +29,27 @@ export default class SortingVisualizer extends React.Component {
         const array = [];
         for (let i = 0; i < SCREEN_WIDTH; i++) {
             array.push(getRandInt(MIN_NUM,MAX_NUM));
+            // array.push(i);
         }
+        // array.sort(()=>Math.random() - 0.5)
         this.setState({array});
     }
 
     mergeSort(){}
 
     quickSort() {
-        const animations = quickSort(this.state.array);
-        const arrayBars = document.getElementsByClassName('array-bar');
-        for (let i = 0; i < animations.length; i++) {
-            setTimeout(() => {
-                const [barOneIdx, newHeight] = animations[i];
-                const barOneStyle = arrayBars[barOneIdx].style;
-                barOneStyle.height = `${newHeight}px`;
-                // barOneStyle.backgroundColor = 'pink';
+        updateAnimation(quickSort(this.state.array))(1);
 
-            }, i * ANIMATION_SPEED_MS);
-        }
 
     }
 
-    heapSort(){}
+    heapSort(){
+
+
+    }
 
     insertionSort(){
-        // console.log(checkSorter(insertionSort)(this.state.array));
-        let arr = [2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 9, 10, 12, 12, 12, 13, 13, 13, 15, 15, 16, 16, 18, 20, 22, 23, 23, 24, 24, 25, 34, 34, 34, 43, 55, 66, 79, 123, 123, 545];
-        console.log(medianOfMedians(arr, 0, arr.length))
+        updateAnimation(insertionSort(this.state.array))(0.1);
     }
 
     testAlgorithms(){
@@ -62,7 +57,7 @@ export default class SortingVisualizer extends React.Component {
             const arr = [];
 
             for(let j = 0; j<getRandInt(5,10000); j++){
-                arr.push(getRandInt(-1000,1000))
+                arr.push(getRandInt(5,1000))
             }
             console.log(checkSorter(quickSort)(arr))
 
@@ -106,4 +101,15 @@ const checkSorter = (myAlgo) => (array) =>{
 
 const getRandInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const updateAnimation = (animations) => (speed) => {
+    const arrayBars = document.getElementsByClassName('array-bar');
+    for (let i = 0; i < animations.length; i++) {
+        setTimeout(() => {
+            const [barOneIdx, newHeight] = animations[i];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            barOneStyle.height = `${newHeight}px`;
+        }, i * speed);
+    }
 }
