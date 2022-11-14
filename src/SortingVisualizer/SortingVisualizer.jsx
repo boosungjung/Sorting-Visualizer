@@ -48,7 +48,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     quickSort() {
-        this.updateAnimation(quickSort(this.state.array))(this.state.speed / 2);
+        this.updateAnimation(quickSort(this.state.array))(this.state.speed);
     }
 
     heapSort() {
@@ -57,7 +57,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     insertionSort() {
-        this.updateAnimation(insertionSort(this.state.array))(this.state.speed / 2); // /10 because insertion sort is so slow
+        this.updateAnimation(insertionSort(this.state.array))(this.state.speed / 10); // /10 because insertion sort is so slow
     }
 
     testAlgorithms() {

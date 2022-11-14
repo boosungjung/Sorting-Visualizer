@@ -32,7 +32,7 @@ const merge = (array, animations, left, right) => {
         }else{
             let value = array[array_j];
             let idx = array_j;
-            while (idx !== array_i){
+            while (idx !== array_i){ // push everything to the right from array_j
                 animations.push([idx, array[idx - 1]]);
                 animations.push([idx-1, array[idx]]);
                 array[idx] = array[idx - 1];
@@ -51,11 +51,5 @@ const merge = (array, animations, left, right) => {
 
     // console.log("low = ", low, " high = ", high, " " ,array.slice(low,high))
 
-}
-const swap = (array, i, j) => {
-
-    let temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
 }
 export default mergeSort;
