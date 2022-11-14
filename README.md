@@ -8,9 +8,10 @@ Quick Sort (Dutch National Flag & Median Of Medians)
 - Best Time Complexity O(NlogN)
 - Worst Time Complexity O(NlogN)
 
-Merge Sort (In-place)
-- Best Time Complexity O(NlogN)
-- Worst Time Complexity O(NlogN)
+Merge Sort (In-place) 
+- Best Time Complexity O(N^2logN)
+- Worst Time Complexity O(N^2logN)
+- Why use in-place when you can sacrifice space for speed? 
 
 Insertion Sort
 - Best Time Complexity O(N)
