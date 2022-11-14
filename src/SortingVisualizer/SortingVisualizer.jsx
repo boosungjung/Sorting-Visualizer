@@ -100,9 +100,10 @@ export default class SortingVisualizer extends React.Component {
 
     updateAnimation = (animations) => (speed) => {
         const arrayBars = document.getElementsByClassName('array-bar');
-
         for (let i = 0; i < animations.length; i++) {
+
             setTimeout(() => {
+
                 const [index, newHeight, isComp] = animations[i];
                 if (!isComp) {
                     const currentBar = arrayBars[index].style;
@@ -114,6 +115,7 @@ export default class SortingVisualizer extends React.Component {
                 }
             }, i * speed);
         }
+
     }
 
 
