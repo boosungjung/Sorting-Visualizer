@@ -2,13 +2,15 @@ import medianOfMedians from "./AuxiliaryAlgorithms/MedianOfMedians";
 
 const quickSort = array => {
     const animations = [];
-    aux_quickSort(array, 0, array.length-1, animations)
+    // the animations array will hold an array with 3 values. [current number, number to switch, bool]
+    // the bool is true if it is a comparison and false if it is a swap
+    aux_quickSort(array, 0, array.length - 1, animations)
     console.log(array)
     return animations;
 }
 
 const aux_quickSort = (array, low, high, animations) => {
-    if (low<high) {
+    if (low < high) {
         let pivots = dnfPartition(array, low, high, animations) // partition the array
         // console.log(array)
         let index_of_pivot_start = pivots[0]
@@ -19,6 +21,25 @@ const aux_quickSort = (array, low, high, animations) => {
         aux_quickSort(array, index_of_pivot_end + 1, high, animations)
     }
 }
+
+const findPivotIndexEnd = (arr, item) => {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === item && arr[i + 1] !== item) {
+            return i;
+        }
+    }
+    return arr.length - 1;
+}
+
+const findPivotIndexStart = (arr, item) => {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === item) {
+            return i;
+        }
+    }
+    return arr.length - 1;
+}
+
 
 const swap = (array, i, j) => {
 
@@ -38,9 +59,11 @@ const dnfPartition = (array, low, high, animations) => {
     let j = low
     while (j <= boundary2) {
 
+        // animations.push([boundary1, pivot, true])
+        // animations.push([boundary1, pivot, false])
         if (array[j] < pivot) {
-            animations.push([boundary1,array[j]])
-            animations.push([j,array[boundary1]])
+            animations.push([boundary1, array[j]])
+            animations.push([j, array[boundary1]])
 
             swap(array, boundary1, j)
 
@@ -50,8 +73,8 @@ const dnfPartition = (array, low, high, animations) => {
 
 
         } else if (array[j] > pivot) {
-            animations.push([j,array[boundary2]])
-            animations.push([boundary2,array[j]])
+            animations.push([j, array[boundary2]])
+            animations.push([boundary2, array[j]])
 
             swap(array, j, boundary2)
 
@@ -59,13 +82,11 @@ const dnfPartition = (array, low, high, animations) => {
             boundary2 -= 1
 
         } else {
-
             j += 1
         }
     }
     return [boundary1, boundary2]
 }
-
 
 
 export default quickSort;
