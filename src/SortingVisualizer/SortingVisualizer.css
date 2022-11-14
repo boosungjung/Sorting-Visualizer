@@ -1,11 +1,11 @@
 .background{
+    position: relative;
     height: 2000px;
     background-color: #282c34;
 
 }
 
 .array-container{
-    float: left;
     height: 700px;
     width: 100%;
     margin: 0 33px;
@@ -22,10 +22,8 @@
 .button-container{
     height: 100px;
     width: 100%;
-    position: static;
 }
 .button{
-    position: relative;
     height:60px;
     width:300px;
 }

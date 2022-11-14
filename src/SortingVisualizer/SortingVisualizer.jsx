@@ -3,6 +3,7 @@ import './SortingVisualizer.css';
 import insertionSort from "../SortingAlgorithms/insertionSort";
 import quickSort from "../SortingAlgorithms/quickSort";
 import mergeSort from "../SortingAlgorithms/mergeSort";
+import radixSort from "../SortingAlgorithms/radixSort";
 
 
 const MAX_NUM = 700;
@@ -28,7 +29,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     resetArray() {
-        const array = [MAX_NUM];
+        const array = [];
         for (let i = 0; i < SCREEN_WIDTH - 1; i++) {
             array.push(getRandInt(MIN_NUM, MAX_NUM));
             // array.push(i);
@@ -51,8 +52,8 @@ export default class SortingVisualizer extends React.Component {
         this.updateAnimation(quickSort(this.state.array))(this.state.speed);
     }
 
-    heapSort() {
-
+    radixSort() {
+        this.updateAnimation(radixSort(this.state.array))(this.state.speed*3);
 
     }
 
@@ -61,15 +62,18 @@ export default class SortingVisualizer extends React.Component {
     }
 
     testAlgorithms() {
-        for (let i = 0; i < 1000; i++) {
+        let incorrect = 0;
+        for (let i = 0; i < 100; i++) {
             const arr = [];
-
-            for (let j = 0; j < getRandInt(5, 10000); j++) {
+            console.log(incorrect)
+            for (let j = 0; j < getRandInt(-53333, 10000); j++) {
                 arr.push(getRandInt(5, 1000))
             }
-            console.log(checkSorter(quickSort)(arr))
-
+            if (checkSorter(radixSort)(arr)) {
+                incorrect++;
+            }
         }
+        console.log(incorrect)
     }
 
     increaseSpeed() {
@@ -133,7 +137,6 @@ export default class SortingVisualizer extends React.Component {
                             key={idx}
                             style={{height: `${val}px`}}></div>
                     ))}
-
                 </div>
                 <div className={"button-container"}>
                     <button className="button" id="btnReset" onClick={() => this.resetArray()}>Generate New Array
@@ -143,7 +146,7 @@ export default class SortingVisualizer extends React.Component {
                     </button>
                     <button className="button" id="btnQuickSort" onClick={() => this.quickSort()}>Quick Sort(DNF)
                     </button>
-                    <button className="button" disabled={true} id="btnHeapSort" onClick={() => this.heapSort()}>Heap
+                    <button className="button" disabled={false} id="btnRadixSort" onClick={() => this.radixSort()}>Radix
                         Sort
                     </button>
                     <button className="button" id="btnInsertionSort" onClick={() => this.insertionSort()}>Insertion
@@ -171,13 +174,13 @@ export default class SortingVisualizer extends React.Component {
 
 const checkSorter = (myAlgo) => (array) => {
     array = myAlgo(array, true)
-    for (let i = 0; i<array.length; i++){
-        if (array[i]>array[i+1]){
-            console.log("ERROR ", array[i],array[i+1])
-            return;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] > array[i + 1]) {
+            console.log("ERROR ", array[i], array[i + 1])
+            return true;
         }
     }
-    console.log("CORRECT")
+    return false;
 
 
 }

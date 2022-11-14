@@ -32,7 +32,7 @@ const merge = (array, animations, left, right) => {
         }else{
             let value = array[array_j];
             let idx = array_j;
-            while (idx !== array_i){ // push everything to the right from array_j
+            while (idx !== array_i){ // shift everything to the right from array_j
                 animations.push([idx, array[idx - 1]]);
                 animations.push([idx-1, array[idx]]);
                 array[idx] = array[idx - 1];
@@ -41,8 +41,8 @@ const merge = (array, animations, left, right) => {
             animations.push([array_i, value])
             animations.push([array_j, array[array_i]])
 
-            array[array_i] = value;
-            array_i+=1;
+            array[array_i] = value; // place value in new spot
+            array_i+=1; // go to next values
             array_j+=1;
             arrayEnd_i+=1;
         }
