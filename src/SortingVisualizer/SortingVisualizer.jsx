@@ -18,8 +18,7 @@ export default class SortingVisualizer extends React.Component {
 
         this.state = {
             array: [],
-            speed: 1,
-            time: 0,
+            speed: 1
         };
     }
 
@@ -38,7 +37,6 @@ export default class SortingVisualizer extends React.Component {
             return {
                 array: array,
                 speed: this.state.speed, //keeps old state
-                time: 0
             }
         });
     }
@@ -176,6 +174,5 @@ const checkSorter = (myAlgo) => (array) => {
 const getRandInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 
