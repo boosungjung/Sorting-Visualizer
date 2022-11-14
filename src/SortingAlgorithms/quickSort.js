@@ -1,9 +1,13 @@
 import medianOfMedians from "./AuxiliaryAlgorithms/MedianOfMedians";
 
-const quickSort = array => {
+const quickSort = (array, test=false) => {
     const animations = [];
     aux_quickSort(array, 0, array.length-1, animations)
     console.log(array)
+
+    if (test){
+        return array;
+    }
     return animations;
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import './SortingVisualizer.css';
 import insertionSort from "../SortingAlgorithms/insertionSort";
 import quickSort from "../SortingAlgorithms/quickSort";
+import mergeSort from "../SortingAlgorithms/mergeSort";
 
 
 const MAX_NUM = 700;
@@ -42,6 +43,8 @@ export default class SortingVisualizer extends React.Component {
     }
 
     mergeSort() {
+        this.updateAnimation(mergeSort(this.state.array))(this.state.speed / 10);
+
     }
 
     quickSort() {
@@ -135,8 +138,8 @@ export default class SortingVisualizer extends React.Component {
                 <div className={"button-container"}>
                     <button className="button" id="btnReset" onClick={() => this.resetArray()}>Generate New Array
                     </button>
-                    <button className="button" disabled={true} id="btnMergeSort" onClick={() => this.mergeSort()}>Merge
-                        Sort
+                    <button className="button" disabled={false} id="btnMergeSort" onClick={() => this.mergeSort()}>Merge
+                        Sort(In-Place)
                     </button>
                     <button className="button" id="btnQuickSort" onClick={() => this.quickSort()}>Quick Sort(DNF)
                     </button>
@@ -167,7 +170,16 @@ export default class SortingVisualizer extends React.Component {
 }
 
 const checkSorter = (myAlgo) => (array) => {
-    return myAlgo(array) === array.sort();
+    array = myAlgo(array, true)
+    for (let i = 0; i<array.length; i++){
+        if (array[i]>array[i+1]){
+            console.log("ERROR ", array[i],array[i+1])
+            return;
+        }
+    }
+    console.log("CORRECT")
+
+
 }
 
 
