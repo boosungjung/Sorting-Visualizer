@@ -2,9 +2,19 @@
 
 This project is to showcase how different sorting algorithms work.
 
-## Available Scripts
+## Available Algorithms
 
-In the project directory, you can run:
+Quick Sort (Dutch National Flag & Median Of Medians) 
+- Best Time Complexity O(NlogN)
+- Worst Time Complexity O(NlogN)
+
+Merge Sort (In-place)
+- Best Time Complexity O(NlogN)
+- Worst Time Complexity O(NlogN)
+
+Insertion Sort
+- Best Time Complexity O(N)
+- Worst Time Complexity O(N^2)
 
 ### `npm start`
 
