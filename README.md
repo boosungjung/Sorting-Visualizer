@@ -12,6 +12,7 @@ Merge Sort (In-place)
 - Best Time Complexity O(N^2logN)
 - Worst Time Complexity O(N^2logN)
 - Why use in-place when you can sacrifice space for speed? 
+- Even if optimized the Average Time Complexity is O(N(logN)^2)
 
 Insertion Sort
 - Best Time Complexity O(N)
