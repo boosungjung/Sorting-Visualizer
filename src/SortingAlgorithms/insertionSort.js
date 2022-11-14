@@ -9,8 +9,6 @@ const insertionSort = array =>{
             array[j+1] = array[j]
             j = j - 1
         }
-        animations.push([j+1, key])
-
         array[j + 1] = key
     }
 
