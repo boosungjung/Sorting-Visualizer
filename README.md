@@ -1,10 +1,22 @@
-# Getting Started with Create React App
+# Sorting Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is to showcase how different sorting algorithms work.
 
-## Available Scripts
+## Available Algorithms
 
-In the project directory, you can run:
+Quick Sort (Dutch National Flag & Median Of Medians) 
+- Best Time Complexity O(NlogN)
+- Worst Time Complexity O(NlogN)
+
+Merge Sort (In-place) 
+- Best Time Complexity O(N^2logN)
+- Worst Time Complexity O(N^2logN)
+- Why use in-place when you can sacrifice space for speed? 
+- Even if optimized the Average Time Complexity is O(N(logN)^2)
+
+Insertion Sort
+- Best Time Complexity O(N)
+- Worst Time Complexity O(N^2)
 
 ### `npm start`
 
