@@ -12,7 +12,7 @@ const SPEED_MIN = 0;
 const SPEED_MAX = 1.9;
 
 
-let SCREEN_WIDTH = (window.screen.width - 200) / 4; // 200px padding, 4px for margin and array bar width
+let SCREEN_WIDTH = (window.screen.width)/4 - 4; // 200px padding, 4px for margin and array bar width
 export default class SortingVisualizer extends React.Component {
 
     constructor(props, context) {
@@ -129,8 +129,8 @@ export default class SortingVisualizer extends React.Component {
 
         const {array} = this.state; // extract array from state
         return ( //create a new div for every value in the array
-            <div className={"background"}>
-                <div className="array-container">
+            <div className="background">
+                <div className="array-container" id="array-container">
                     {array.map((val, idx) => (
                         <div
                             className="array-bar"

@@ -5,11 +5,14 @@ body {
     font-size: 3em;
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
-a{
+
+a {
     color: white;
     text-decoration: none;
 }
+
 section {
     display: grid;
     place-items: center;
@@ -38,7 +41,11 @@ section {
 
 .logos {
     display: flex;
+    height: 2000px;
+}
 
+html {
+    scroll-behavior: smooth;
 }
 
 img {
@@ -46,6 +53,7 @@ img {
     width: 400px;
     height: 400px;
     transition: 0.5s;
+
 }
 
 img:hover {
@@ -53,7 +61,7 @@ img:hover {
     height: 450px;
 }
 
-.logo_overlay{
+.logo_overlay {
     top: 0;
     left: 0;
     display: flex;
@@ -94,8 +102,6 @@ img:hover {
 /*.logo_title {*/
 /*    font-weight: bold;*/
 /*}*/
-
-
 
 
 .logo:nth-child(2) {
