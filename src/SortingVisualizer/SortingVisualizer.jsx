@@ -53,7 +53,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     radixSort() {
-        this.updateAnimation(radixSort(this.state.array))(this.state.speed*3);
+        this.updateAnimation(radixSort(this.state.array))(this.state.speed*5);
 
     }
 

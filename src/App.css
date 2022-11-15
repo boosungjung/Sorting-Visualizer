@@ -1,5 +1,114 @@
-.App {
-  text-align: center;
-  overflow: hidden;
+body {
+    /*text-align: center;*/
+    background-color: #131316;
+    color: #fff;
+    font-size: 3em;
+    padding: 0;
+    margin: 0;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+section {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    min-height: 100vh;
 }
 
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1.5s;
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+@media (prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
+}
+
+.logos {
+    display: flex;
+
+}
+
+img {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    transition: 0.5s;
+}
+
+img:hover {
+    width: 450px;
+    height: 450px;
+}
+
+.logo_overlay{
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0.8;
+}
+
+/*.logo_overlay {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background-color: rgba(0, 0, 0, 0.6);*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    opacity: 0;*/
+/*    transition: 0.25s;*/
+/*}*/
+
+/*.logo_overlay > * {*/
+/*    transform: translateY(20px);*/
+/*    transition: transform 0.25s;*/
+/*}*/
+
+/*.logo_overlay:hover {*/
+/*    opacity: 1;*/
+
+/*}*/
+
+/*.logo_overlay:hover > * {*/
+/*    transform: translateY(0);*/
+/*}*/
+
+/*.logo_title {*/
+/*    font-weight: bold;*/
+/*}*/
+
+
+
+
+.logo:nth-child(2) {
+
+    transition-delay: 200ms;
+}
+
+.logo:nth-child(3) {
+    transition-delay: 400ms;
+
+}
+
+.logo:nth-child(4) {
+    transition-delay: 600ms;
+
+}

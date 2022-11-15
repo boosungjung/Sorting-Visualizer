@@ -8,16 +8,15 @@
 .array-container{
     height: 700px;
     width: 100%;
-    margin: 0 33px;
+    margin: 0 80px;
 
 }
-
 .array-bar{
     display: inline-block;
     width:2px;
     background-color: papayawhip;
     margin: 0 1px;
-    /*float: left;*/
+    float: left;
 }
 .button-container{
     height: 100px;

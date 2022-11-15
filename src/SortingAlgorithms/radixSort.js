@@ -8,11 +8,11 @@ const radixSort = (array, test = false) => {
 }
 
 const radixSort_aux = (array, animations) => {
-    const base = 2;
-    const max_digit = Math.max.apply(Math, array);
-    for (let column = 0; column < max_digit; column++) {
+    const base = 10;
+    const max_digit = Math.max.apply(Math, array).toString().length;
+    for (let column = 0; column < max_digit + 1; column++) { // + 1 to iterate one last time to animate through the sorted array
         let e = base ** column;
-        let bucket = createBucketArray(10); // size 10 because numbers go from 0-9
+        let bucket = createBucketArray(base); // size 10 because numbers go from 0-9
         for (let i = 0; i < array.length; i ++) {
             let index = (Math.floor(array[i] / e) % base);
             // console.log(index,i,array[i], e, base)
@@ -21,7 +21,6 @@ const radixSort_aux = (array, animations) => {
 
         }
         array = bucket.flat(1);
-        console.log("goin")
     }
     return array;
 }
